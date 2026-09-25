@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nallagajula Yaswanth Kumar — Python Full Stack Developer</title>
+<meta name="description" content="Portfolio of Nallagajula Yaswanth Kumar, Python Full Stack Developer & Web Developer." />
+
+<!-- Google Fonts: Anton for cinematic display headlines, Manrope for everything else -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+<!-- ===================== CUSTOM CURSOR GLOW ===================== -->
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<!-- ===================== PRELOADER ===================== -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <span class="preloader-mark">YK</span>
+</div>
+
+<!-- ===================== NAVBAR ===================== -->
+<header class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#home" class="brand">YASWANTH<span class="brand-dot">.</span></a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home" class="nav-link active">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#skills" class="nav-link">Skills</a>
+      <a href="#education" class="nav-link">Education</a>
+      <a href="#experience" class="nav-link">Experience</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#certificates" class="nav-link">Certificates</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+
+    <a href="#contact" class="nav-cta">Let's Talk</a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HOME / HERO ===================== -->
+<section class="hero" id="home">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="glow glow-a"></div>
+    <div class="glow glow-b"></div>
+    <div class="grain"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow"><span class="dot"></span> Welcome to my world</p>
+      <h1 class="hero-title">
+        <span class="hero-hi">Hi, I'm</span>
+        <span class="hero-name" data-reveal>NALLAGAJULA<br>YASWANTH KUMAR</span>
+      </h1>
+
+      <div class="hero-role">
+        <span class="role-static">I'm a</span>
+        <span class="typed-wrap"><span id="typed" class="typed"></span><span class="cursor-bar">|</span></span>
+      </div>
+
+      <p class="hero-tagline">"Building modern, responsive and user-friendly web applications."</p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="{% static 'Yaswanth_Kumar_Resume.docx' %}" download class="btn btn-ghost">Download Resume</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+
+      <div class="hero-socials">
+        <a href="https://www.linkedin.com/in/nallagajulayaswanthkumar" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.98 1.83-2 3.77-2 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.19 1.44-2.19 2.96V21h-4V9z"/></svg>
+        </a>
+        <a href="mailto:nyaswanthkumar93@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24"><path d="M2 4h20v16H2V4zm2 2.2V18h16V6.2l-8 6-8-6zm.6-.2L12 12.1 19.4 6H4.6z"/></svg>
+        </a>
+        <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.4 9.4 0 015 0c1.9-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.68-4.57 4.92.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="portrait-ring">
+        <div class="portrait-frame">
+          <img src="{% static 'img/profile.jpg' %}" alt="Nallagajula Yaswanth Kumar" class="portrait-photo" onerror="this.style.display='none'">
+          <span class="portrait-initials">YK</span>
+        </div>
+        <div class="orbit orbit-1"><span class="badge" style="--c:#3776ab">Py</span></div>
+        <div class="orbit orbit-2"><span class="badge" style="--c:#092e20">Dj</span></div>
+        <div class="orbit orbit-3"><span class="badge" style="--c:#61dafb">R</span></div>
+        <div class="orbit orbit-4"><span class="badge" style="--c:#f7df1e">JS</span></div>
+        <div class="orbit orbit-5"><span class="badge" style="--c:#4479a1">DB</span></div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-hint" aria-label="Scroll down">
+    <span></span>
+  </a>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section class="about" id="about">
+  <div class="section-head reveal">
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">The developer behind the code</h2>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-copy reveal">
+      <p>I am a passionate Python Full Stack Developer and Web Developer with a strong interest in creating modern and responsive web applications. I enjoy learning new technologies, solving real-world problems and developing useful software applications.</p>
+      <p class="about-sub">Currently based in Andhra Pradesh, India — open to full stack developer opportunities where I can build things that matter.</p>
+    </div>
+
+    <div class="about-cards">
+      <div class="about-card reveal">
+        <span class="about-card-icon">🐍</span>
+        <h3>Python Developer</h3>
+        <p>Writing clean, efficient backend logic and APIs.</p>
+      </div>
+      <div class="about-card reveal">
+        <span class="about-card-icon">🧩</span>
+        <h3>Full Stack Developer</h3>
+        <p>Comfortable across the whole stack, front to back.</p>
+      </div>
+      <div class="about-card reveal">
+        <span class="about-card-icon">🎨</span>
+        <h3>Web Developer</h3>
+        <p>Crafting interfaces that feel good to use.</p>
+      </div>
+      <div class="about-card reveal">
+        <span class="about-card-icon">🧠</span>
+        <h3>Problem Solver</h3>
+        <p>Breaking down hard problems into simple solutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section class="skills" id="skills">
+  <div class="section-head reveal">
+    <p class="section-label">What I Work With</p>
+    <h2 class="section-title">Skills &amp; Technologies</h2>
+  </div>
+
+  <div class="skill-tabs reveal" id="skillTabs">
+    <button class="skill-tab active" data-tab="frontend">Frontend</button>
+    <button class="skill-tab" data-tab="backend">Backend</button>
+    <button class="skill-tab" data-tab="database">Database</button>
+    <button class="skill-tab" data-tab="programming">Programming</button>
+    <button class="skill-tab" data-tab="other">Other</button>
+    <button class="skill-tab" data-tab="soft">Soft Skills</button>
+  </div>
+
+  <div class="skill-panels reveal">
+    <div class="skill-panel active" data-panel="frontend">
+      <div class="skill-chip">HTML5</div>
+      <div class="skill-chip">CSS3</div>
+      <div class="skill-chip">JavaScript</div>
+      <div class="skill-chip">React.js</div>
+    </div>
+    <div class="skill-panel" data-panel="backend">
+      <div class="skill-chip">Python</div>
+      <div class="skill-chip">Django</div>
+      <div class="skill-chip">REST APIs</div>
+    </div>
+    <div class="skill-panel" data-panel="database">
+      <div class="skill-chip">SQL</div>
+      <div class="skill-chip">MySQL</div>
+      <div class="skill-chip">DBMS</div>
+    </div>
+    <div class="skill-panel" data-panel="programming">
+      <div class="skill-chip">Python</div>
+      <div class="skill-chip">C</div>
+      <div class="skill-chip">OOPs</div>
+      <div class="skill-chip">Data Structures</div>
+    </div>
+    <div class="skill-panel" data-panel="other">
+      <div class="skill-chip">AWS</div>
+      <div class="skill-chip">Git</div>
+      <div class="skill-chip">GitHub</div>
+      <div class="skill-chip">Networking</div>
+      <div class="skill-chip">MS Word</div>
+      <div class="skill-chip">MS Excel</div>
+      <div class="skill-chip">MS PowerPoint</div>
+    </div>
+    <div class="skill-panel" data-panel="soft">
+      <div class="skill-chip">Communication</div>
+      <div class="skill-chip">Teamwork</div>
+      <div class="skill-chip">Problem Solving</div>
+      <div class="skill-chip">Time Management</div>
+      <div class="skill-chip">Leadership</div>
+      <div class="skill-chip">Adaptability</div>
+      <div class="skill-chip">Quick Learner</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EDUCATION ===================== -->
+<section class="education" id="education">
+  <div class="section-head reveal">
+    <p class="section-label">Through Time</p>
+    <h2 class="section-title">Education</h2>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-line" aria-hidden="true"></div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-node"></div>
+      <div class="timeline-card">
+        <span class="timeline-year">2021</span>
+        <h3>SSLC</h3>
+        <p>ZPHS Government High School</p>
+        <span class="timeline-score">77%</span>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-node"></div>
+      <div class="timeline-card">
+        <span class="timeline-year">2024</span>
+        <h3>Diploma — Computer Science</h3>
+        <p>Dr. Y.C. James Yen Government College</p>
+        <span class="timeline-score">62%</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<section class="experience" id="experience">
+  <div class="section-head reveal">
+    <p class="section-label">On The Job</p>
+    <h2 class="section-title">Experience</h2>
+  </div>
+
+  <div class="exp-list">
+    <div class="exp-card reveal">
+      <div class="exp-top">
+        <h3>Python Full Stack Development Intern</h3>
+        <span class="exp-date">Sep 2025 – Mar 2026</span>
+      </div>
+      <p class="exp-company">WebTech Software Solutions · Bengaluru, Karnataka</p>
+      <p class="exp-desc">Worked on live development tasks applying Python and full-stack concepts, collaborating with a team to ship features within deadlines.</p>
+      <div class="exp-tags">
+        <span>Python</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React.js</span><span>SQL</span>
+      </div>
+    </div>
+
+    <div class="exp-card reveal">
+      <div class="exp-top">
+        <h3>Production Department — Internship Trainee</h3>
+        <span class="exp-date">Jun 2023 – Nov 2023</span>
+      </div>
+      <p class="exp-company">Aaviza Electronics Private Limited · Bengaluru</p>
+      <p class="exp-desc">Assembled electronic products following quality and safety procedures, supporting the team in meeting daily production targets.</p>
+      <div class="exp-tags">
+        <span>Quality Control</span><span>Assembly</span><span>Teamwork</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section class="projects" id="projects">
+  <div class="section-head reveal">
+    <p class="section-label">Selected Work</p>
+    <h2 class="section-title">Projects</h2>
+  </div>
+
+  <div class="project-grid">
+    <article class="project-card reveal" data-tilt>
+      <div class="project-cover cover-1">
+        <span class="project-cover-tag">Web App</span>
+      </div>
+      <div class="project-body">
+        <h3>FocusNest</h3>
+        <p>Daily productivity and habit-tracking web application with secure auth, a "Start My Day" workflow, and a live dashboard of tasks &amp; habits.</p>
+        <div class="project-tech">
+          <span>Python</span><span>Django</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>SQL</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="btn-small">GitHub</a>
+          <a href="{% static 'projects/focusnest/index.html' %}" target="_blank" class="btn-small btn-small-fill">Live Demo</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card reveal" data-tilt>
+      <div class="project-cover cover-2">
+        <span class="project-cover-tag">Embedded</span>
+      </div>
+      <div class="project-body">
+        <h3>Vehicle Speed Controller on Highways</h3>
+        <p>RF-communication based system that automatically reduces vehicle speed in limited zones, improving safety near schools and residential areas.</p>
+        <div class="project-tech">
+          <span>Arduino</span><span>RF Communication</span><span>DC Motor</span><span>Embedded Systems</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="btn-small">GitHub</a>
+          <a href="{% static 'projects/speed-controller/index.html' %}" target="_blank" class="btn-small btn-small-fill">Live Demo</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="project-card reveal" data-tilt>
+      <div class="project-cover cover-3">
+        <span class="project-cover-tag">Portfolio</span>
+      </div>
+      <div class="project-body">
+        <h3>Personal Portfolio Website</h3>
+        <p>A cinematic, animated personal portfolio built from scratch — the very site you're looking at right now.</p>
+        <div class="project-tech">
+          <span>HTML</span><span>CSS</span><span>JavaScript</span>
+        </div>
+        <div class="project-links">
+          <a href="#" class="btn-small">GitHub</a>
+          <a href="#home" class="btn-small btn-small-fill">Live Demo</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===================== CERTIFICATES ===================== -->
+<section class="certificates" id="certificates">
+  <div class="section-head reveal">
+    <p class="section-label">Proof Of Work</p>
+    <h2 class="section-title">Certificates</h2>
+  </div>
+
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <div class="cert-ribbon">🎓</div>
+      <h3>Web Development Certificate</h3>
+      <p>Skill AP (APSSDC)</p>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-ribbon">🧮</div>
+      <h3>Data Structures Certificate</h3>
+      <p>MAANG Careers</p>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-ribbon">🐍</div>
+      <h3>Python Fast Track Program</h3>
+      <p>MAANG Careers</p>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-ribbon">💼</div>
+      <h3>Full Stack Development Internship</h3>
+      <p>WebTech Software Solutions</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section class="services" id="services">
+  <div class="section-head reveal">
+    <p class="section-label">How I Can Help</p>
+    <h2 class="section-title">Services</h2>
+  </div>
+
+  <div class="service-grid">
+    <div class="service-card reveal">
+      <span class="service-icon">🌐</span>
+      <h3>Web Development</h3>
+      <p>Responsive, fast-loading websites built with clean, maintainable code.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🐍</span>
+      <h3>Python Development</h3>
+      <p>Backend logic, automation and scripts that just work.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🧩</span>
+      <h3>Full Stack Development</h3>
+      <p>End-to-end applications from database to interface.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🔌</span>
+      <h3>REST API Development</h3>
+      <p>Well-structured APIs that are easy to consume and extend.</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-icon">🗄️</span>
+      <h3>Database Development</h3>
+      <p>Schema design and query optimisation for reliable data.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="contact" id="contact">
+  <div class="section-head reveal">
+    <p class="section-label">Get In Touch</p>
+    <h2 class="section-title">Let's build something together</h2>
+  </div>
+
+  <div class="contact-grid">
+    <form class="contact-form reveal" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="+91 00000 00000">
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+
+    <div class="contact-info reveal">
+      <div class="info-item">
+        <span class="info-icon">✉️</span>
+        <div>
+          <span class="info-label">Email</span>
+          <a href="mailto:nyaswanthkumar93@gmail.com">nyaswanthkumar93@gmail.com</a>
+        </div>
+      </div>
+      <div class="info-item">
+        <span class="info-icon">📞</span>
+        <div>
+          <span class="info-label">Phone</span>
+          <a href="tel:+919346219464">+91 93462 19464</a>
+        </div>
+      </div>
+      <div class="info-item">
+        <span class="info-icon">📍</span>
+        <div>
+          <span class="info-label">Location</span>
+          <span>Andhra Pradesh, India</span>
+        </div>
+      </div>
+
+      <div class="info-socials">
+        <a href="https://www.linkedin.com/in/nallagajulayaswanthkumar" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9h4v12H3V9zm7 0h3.8v1.7h.05c.53-.98 1.83-2 3.77-2 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.6c0-1.34-.03-3.06-1.9-3.06-1.9 0-2.19 1.44-2.19 2.96V21h-4V9z"/></svg>
+        </a>
+        <a href="https://github.com/" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-3.16 19.5c.5.1.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.4 9.4 0 015 0c1.9-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.68-4.57 4.92.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0012 2z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer-inner">
+    <a href="#home" class="brand">YASWANTH<span class="brand-dot">.</span></a>
+    <nav class="footer-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="footer-copy">© <span id="year"></span> Nallagajula Yaswanth Kumar. All rights reserved.</p>
+  </div>
+</footer>
+
+<button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+<script src="{% static 'script.js' %}"></script>
+</body>
+</html>

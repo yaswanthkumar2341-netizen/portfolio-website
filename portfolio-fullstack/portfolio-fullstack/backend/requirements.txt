@@ -1,0 +1,6 @@
+Django==5.0.6
+djangorestframework==3.15.2
+django-cors-headers==4.4.0
+
+# Uncomment if you switch DATABASES to MySQL in config/settings.py:
+# mysqlclient==2.2.4
