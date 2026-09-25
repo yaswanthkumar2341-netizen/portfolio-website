@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehicle Speed Controller — Project Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07070a; --surface: #111117; --border: rgba(255,255,255,0.08);
+    --text: #f3f2ef; --text-dim: #9a9aa4; --text-faint: #64646d;
+    --accent: #ff4b2b; --accent-rgb: 255,75,43; --accent-2: #ffb020;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Manrope', sans-serif; min-height: 100svh; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; border-bottom: 1px solid var(--border); }
+  .brand { font-family: 'Anton', sans-serif; letter-spacing: .03em; font-size: 20px; }
+  .brand span { color: var(--accent); }
+  .back { font-size: 13px; font-weight: 700; color: var(--text-dim); border: 1px solid var(--border); padding: 8px 16px; border-radius: 100px; }
+  .back:hover { color: var(--text); border-color: var(--accent); }
+  .badge { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; background: rgba(var(--accent-rgb),0.12); color: var(--accent); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 50px 24px 80px; }
+  .hero { text-align: center; margin-bottom: 40px; }
+  .hero h1 { font-family: 'Anton', sans-serif; font-size: clamp(28px,5vw,42px); margin: 14px 0 10px; }
+  .hero p { color: var(--text-dim); max-width: 56ch; margin: 0 auto; }
+
+  .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 30px; }
+
+  .road-wrap { position: relative; height: 150px; border-radius: 12px; overflow: hidden; background: #14141a; margin-bottom: 26px; }
+  .road { position: absolute; inset: 0; }
+  .lane { position: absolute; top: 50%; left: 0; right: 0; height: 4px; margin-top: -2px;
+    background-image: repeating-linear-gradient(to right, #33333d 0 24px, transparent 24px 48px); }
+
+  .zone {
+    position: absolute; top: 0; bottom: 0; width: 26%; left: 62%;
+    background: linear-gradient(180deg, rgba(255,176,32,0.16), rgba(255,176,32,0.05));
+    border-left: 2px dashed rgba(255,176,32,.6);
+    border-right: 2px dashed rgba(255,176,32,.6);
+  }
+  .zone-label {
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--accent-2); white-space: nowrap;
+  }
+  .rf-tower { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 22px; }
+
+  .car { position: absolute; bottom: 18px; left: -60px; font-size: 34px; transition: left linear; transform: scaleX(-1); }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: center; margin-bottom: 26px; }
+  button.run {
+    padding: 13px 26px; border-radius: 100px; border: none; cursor: pointer;
+    background: linear-gradient(135deg,var(--accent),#ff7a3d); color: #0a0a0a; font-weight: 800; font-size: 14px;
+  }
+  button.run:disabled { opacity: .5; cursor: not-allowed; }
+
+  .gauges { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
+  .gauge { background: #0c0c11; border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
+  .gauge b { display: block; font-family: 'Anton', sans-serif; font-size: 30px; }
+  .gauge span { font-size: 12px; color: var(--text-faint); text-transform: uppercase; letter-spacing: .05em; }
+  #speedVal { color: var(--accent); }
+  #statusVal.safe { color: #6fdc8c; }
+  #statusVal.slow { color: var(--accent-2); }
+
+  .log { margin-top: 22px; font-size: 13px; color: var(--text-dim); min-height: 20px; text-align: center; }
+  .note { margin-top: 30px; font-size: 12.5px; color: var(--text-faint); text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="../../index.html" class="brand">YASWANTH<span>.</span></a>
+  <a href="../../index.html#projects" class="back">← Back to portfolio</a>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <span class="badge">Live Demo</span>
+    <h1>RF Vehicle Speed Controller</h1>
+    <p>A visual simulation of the hardware project: as the vehicle enters an RF-marked restricted zone (like a school area), its speed is automatically capped — then restored once it exits.</p>
+  </div>
+
+  <div class="panel">
+    <div class="road-wrap">
+      <div class="road">
+        <div class="lane"></div>
+        <div class="zone">
+          <span class="zone-label">Restricted Zone</span>
+          <span class="rf-tower">📡</span>
+        </div>
+        <div class="car" id="car">🚗</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button class="run" id="runBtn">▶ Start Simulation</button>
+    </div>
+
+    <div class="gauges">
+      <div class="gauge"><b id="speedVal">80</b><span>km/h</span></div>
+      <div class="gauge"><b id="statusVal" class="safe">Normal</b><span>Zone Status</span></div>
+      <div class="gauge"><b id="rfVal">Idle</b><span>RF Signal</span></div>
+    </div>
+
+    <p class="log" id="log">Press start to run the vehicle down the road.</p>
+  </div>
+
+  <p class="note">Front-end simulation only — no real Arduino/RF hardware is connected. In the physical build, an RF receiver on the vehicle picks up the zone's signal and a motor driver circuit throttles the DC motor accordingly.</p>
+</div>
+
+<script>
+  const car = document.getElementById('car');
+  const runBtn = document.getElementById('runBtn');
+  const speedVal = document.getElementById('speedVal');
+  const statusVal = document.getElementById('statusVal');
+  const rfVal = document.getElementById('rfVal');
+  const log = document.getElementById('log');
+
+  const ROAD_WIDTH = () => document.querySelector('.road-wrap').clientWidth;
+  const ZONE_START = 0.62, ZONE_END = 0.88; // matches .zone CSS position
+
+  let running = false;
+
+  function setSpeed(v) { speedVal.textContent = v; }
+  function setStatus(inZone) {
+    statusVal.textContent = inZone ? 'Slowed' : 'Normal';
+    statusVal.className = inZone ? 'slow' : 'safe';
+    rfVal.textContent = inZone ? 'Signal Locked' : 'Idle';
+  }
+
+  function runSim() {
+    if (running) return;
+    running = true;
+    runBtn.disabled = true;
+    runBtn.textContent = '● Running...';
+    log.textContent = 'Vehicle approaching at normal highway speed...';
+
+    const roadW = ROAD_WIDTH();
+    const totalDistance = roadW + 80;
+    const duration = 6000; // ms for the whole pass
+    car.style.transition = `left ${duration}ms linear`;
+    setSpeed(80); setStatus(false);
+
+    requestAnimationFrame(() => { car.style.left = (totalDistance - 60) + 'px'; });
+
+    const zoneEnterTime = duration * ZONE_START;
+    const zoneExitTime = duration * ZONE_END;
+
+    setTimeout(() => {
+      setSpeed(30); setStatus(true);
+      log.textContent = 'RF signal detected — speed automatically reduced to 30 km/h.';
+    }, zoneEnterTime);
+
+    setTimeout(() => {
+      setSpeed(80); setStatus(false);
+      log.textContent = 'Vehicle has exited the zone — normal speed restored.';
+    }, zoneExitTime);
+
+    setTimeout(() => {
+      running = false;
+      runBtn.disabled = false;
+      runBtn.textContent = '↻ Run Again';
+      car.style.transition = 'none';
+      car.style.left = '-60px';
+      setSpeed(80); setStatus(false);
+      log.textContent = 'Press start to run the vehicle down the road.';
+    }, duration + 400);
+  }
+
+  runBtn.addEventListener('click', runSim);
+</script>
+</body>
+</html>

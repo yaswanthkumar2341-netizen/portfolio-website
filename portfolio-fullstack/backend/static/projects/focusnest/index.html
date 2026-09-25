@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FocusNest — Project Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #07070a; --surface: #111117; --surface-2: #16161e; --border: rgba(255,255,255,0.08);
+    --text: #f3f2ef; --text-dim: #9a9aa4; --text-faint: #64646d;
+    --accent: #ff4b2b; --accent-rgb: 255,75,43; --accent-2: #ffb020;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Manrope', sans-serif; min-height: 100svh; }
+  .topbar { display: flex; align-items: center; justify-content: space-between; padding: 20px 32px; border-bottom: 1px solid var(--border); }
+  .brand { font-family: 'Anton', sans-serif; letter-spacing: .03em; font-size: 20px; }
+  .brand span { color: var(--accent); }
+  .back { font-size: 13px; font-weight: 700; color: var(--text-dim); border: 1px solid var(--border); padding: 8px 16px; border-radius: 100px; }
+  .back:hover { color: var(--text); border-color: var(--accent); }
+  .badge { font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; background: rgba(var(--accent-rgb),0.12); color: var(--accent); }
+
+  .wrap { max-width: 920px; margin: 0 auto; padding: 50px 24px 80px; }
+  .hero { text-align: center; margin-bottom: 46px; }
+  .hero h1 { font-family: 'Anton', sans-serif; font-size: clamp(30px,5vw,46px); margin: 14px 0 10px; }
+  .hero p { color: var(--text-dim); max-width: 52ch; margin: 0 auto; }
+
+  .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 26px; }
+  .card h2 { font-size: 16px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; }
+  .card h2 small { color: var(--text-faint); font-weight: 600; font-size: 12.5px; }
+
+  .add-row { display: flex; gap: 10px; margin-bottom: 18px; }
+  .add-row input {
+    flex: 1; padding: 12px 14px; background: #0c0c11; border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-family: inherit; font-size: 14px;
+  }
+  .add-row input:focus { outline: none; border-color: var(--accent); }
+  .add-row button {
+    padding: 0 18px; border-radius: 8px; border: none; background: linear-gradient(135deg,var(--accent),#ff7a3d);
+    color: #0a0a0a; font-weight: 800; font-size: 13px; cursor: pointer;
+  }
+
+  ul.list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  ul.list li {
+    display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px;
+    font-size: 14.5px; transition: transform .2s ease, opacity .2s ease;
+  }
+  ul.list li.done { opacity: .5; text-decoration: line-through; }
+  ul.list li input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; }
+  ul.list li .task-text { flex: 1; }
+  ul.list li .del { color: var(--text-faint); cursor: pointer; font-size: 13px; }
+  ul.list li .del:hover { color: var(--accent); }
+  .empty { color: var(--text-faint); font-size: 13.5px; padding: 10px 4px; }
+
+  .habits { display: flex; flex-direction: column; gap: 12px; }
+  .habit-row { display: flex; align-items: center; gap: 12px; }
+  .habit-row .name { flex: 1; font-size: 14.5px; font-weight: 700; }
+  .streak { font-size: 12px; font-weight: 800; color: var(--accent-2); background: rgba(255,176,32,.12); padding: 4px 10px; border-radius: 100px; }
+  .dots { display: flex; gap: 5px; }
+  .dot { width: 14px; height: 14px; border-radius: 4px; background: #23232d; cursor: pointer; border: 1px solid var(--border); }
+  .dot.on { background: var(--accent); border-color: var(--accent); }
+
+  .stats-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-top: 22px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
+  .stat b { display: block; font-family: 'Anton', sans-serif; font-size: 26px; color: var(--accent); }
+  .stat span { font-size: 12px; color: var(--text-faint); }
+
+  .note { margin-top: 30px; font-size: 12.5px; color: var(--text-faint); text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="/" class="brand">YASWANTH<span>.</span></a>
+  <a href="/#projects" class="back">← Back to portfolio</a>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <span class="badge">Live Demo</span>
+    <h1>FocusNest</h1>
+    <p>A daily productivity &amp; habit-tracking demo. Add tasks, check them off, and build a streak — everything is saved to your browser, so refresh away.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Today's Tasks <small id="taskCount">0 open</small></h2>
+      <div class="add-row">
+        <input type="text" id="taskInput" placeholder="What do you need to get done?">
+        <button id="addTaskBtn">Add</button>
+      </div>
+      <ul class="list" id="taskList"></ul>
+    </div>
+
+    <div class="card">
+      <h2>Habits <small>tap a day to mark it done</small></h2>
+      <div class="habits" id="habitList"></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><b id="statDone">0</b><span>Tasks completed</span></div>
+    <div class="stat"><b id="statStreak">0</b><span>Best habit streak</span></div>
+    <div class="stat"><b id="statDay">1</b><span>Day using FocusNest</span></div>
+  </div>
+
+  <p class="note">This is a front-end demo (data lives only in your browser's localStorage). The full version uses the Django + MySQL backend also included in this project.</p>
+</div>
+
+<script>
+  const TASK_KEY = 'focusnest_tasks';
+  const HABIT_KEY = 'focusnest_habits';
+  const DAY_KEY = 'focusnest_day';
+
+  const taskList = document.getElementById('taskList');
+  const taskInput = document.getElementById('taskInput');
+  const taskCount = document.getElementById('taskCount');
+  const statDone = document.getElementById('statDone');
+  const statStreak = document.getElementById('statStreak');
+  const statDay = document.getElementById('statDay');
+  const habitList = document.getElementById('habitList');
+
+  let tasks = JSON.parse(localStorage.getItem(TASK_KEY) || 'null') || [
+    { text: 'Review today\'s priorities', done: true },
+    { text: 'Finish portfolio project demo', done: false },
+    { text: '30 min focused study block', done: false }
+  ];
+
+  let habits = JSON.parse(localStorage.getItem(HABIT_KEY) || 'null') || [
+    { name: 'Code for 1 hour', days: [1,1,0,1,1,0,0] },
+    { name: 'Read for 20 mins', days: [1,0,1,1,0,0,0] },
+    { name: 'No phone before bed', days: [0,1,1,0,1,0,0] }
+  ];
+
+  function save() {
+    localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
+    localStorage.setItem(HABIT_KEY, JSON.stringify(habits));
+  }
+
+  function renderTasks() {
+    taskList.innerHTML = '';
+    if (tasks.length === 0) {
+      taskList.innerHTML = '<p class="empty">No tasks yet — add your first one above.</p>';
+    }
+    tasks.forEach((t, i) => {
+      const li = document.createElement('li');
+      li.className = t.done ? 'done' : '';
+      li.innerHTML = `
+        <input type="checkbox" ${t.done ? 'checked' : ''} data-i="${i}">
+        <span class="task-text">${t.text}</span>
+        <span class="del" data-i="${i}">✕</span>`;
+      taskList.appendChild(li);
+    });
+    const open = tasks.filter(t => !t.done).length;
+    taskCount.textContent = `${open} open`;
+    statDone.textContent = tasks.filter(t => t.done).length;
+  }
+
+  function renderHabits() {
+    habitList.innerHTML = '';
+    let bestStreak = 0;
+    habits.forEach((h, hi) => {
+      let streak = 0;
+      for (let i = h.days.length - 1; i >= 0; i--) {
+        if (h.days[i]) streak++; else break;
+      }
+      bestStreak = Math.max(bestStreak, streak);
+
+      const row = document.createElement('div');
+      row.className = 'habit-row';
+      const dots = h.days.map((d, di) =>
+        `<span class="dot ${d ? 'on' : ''}" data-h="${hi}" data-d="${di}"></span>`
+      ).join('');
+      row.innerHTML = `
+        <span class="name">${h.name}</span>
+        <div class="dots">${dots}</div>
+        <span class="streak">${streak}🔥</span>`;
+      habitList.appendChild(row);
+    });
+    statStreak.textContent = bestStreak;
+  }
+
+  taskList.addEventListener('click', (e) => {
+    const i = e.target.dataset.i;
+    if (i === undefined) return;
+    if (e.target.type === 'checkbox') tasks[i].done = e.target.checked;
+    if (e.target.classList.contains('del')) tasks.splice(i, 1);
+    save(); renderTasks();
+  });
+
+  document.getElementById('addTaskBtn').addEventListener('click', addTask);
+  taskInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addTask(); });
+  function addTask() {
+    const val = taskInput.value.trim();
+    if (!val) return;
+    tasks.push({ text: val, done: false });
+    taskInput.value = '';
+    save(); renderTasks();
+  }
+
+  habitList.addEventListener('click', (e) => {
+    const h = e.target.dataset.h, d = e.target.dataset.d;
+    if (h === undefined) return;
+    habits[h].days[d] = habits[h].days[d] ? 0 : 1;
+    save(); renderHabits();
+  });
+
+  // day counter — first visit starts the clock
+  let startDay = localStorage.getItem(DAY_KEY);
+  if (!startDay) { startDay = Date.now(); localStorage.setItem(DAY_KEY, startDay); }
+  statDay.textContent = Math.max(1, Math.floor((Date.now() - startDay) / 86400000) + 1);
+
+  renderTasks();
+  renderHabits();
+</script>
+</body>
+</html>
